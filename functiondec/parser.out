@@ -1,0 +1,243 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    FLOAT
+
+Grammar
+
+Rule 0     S' -> function_declaration
+Rule 1     function_declaration -> DEF IDENTIFIER LPAREN parameter_list RPAREN COLON
+Rule 2     parameter_list -> parameters
+Rule 3     parameter_list -> empty
+Rule 4     parameters -> parameter
+Rule 5     parameters -> parameter COMMA parameters_without_default
+Rule 6     parameters -> parameter_with_default
+Rule 7     parameters_without_default -> parameter
+Rule 8     parameters_without_default -> parameter COMMA parameters_without_default
+Rule 9     parameter -> IDENTIFIER
+Rule 10    parameter_with_default -> parameter EQUAL IDENTIFIER
+Rule 11    parameter_with_default -> parameter EQUAL NUMBER
+Rule 12    parameter_with_default -> parameter EQUAL STRING
+Rule 13    empty -> <empty>
+
+Terminals, with rules where they appear
+
+COLON                : 1
+COMMA                : 5 8
+DEF                  : 1
+EQUAL                : 10 11 12
+FLOAT                : 
+IDENTIFIER           : 1 9 10
+LPAREN               : 1
+NUMBER               : 11
+RPAREN               : 1
+STRING               : 12
+error                : 
+
+Nonterminals, with rules where they appear
+
+empty                : 3
+function_declaration : 0
+parameter            : 4 5 7 8 10 11 12
+parameter_list       : 1
+parameter_with_default : 6
+parameters           : 2
+parameters_without_default : 5 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . function_declaration
+    (1) function_declaration -> . DEF IDENTIFIER LPAREN parameter_list RPAREN COLON
+
+    DEF             shift and go to state 2
+
+    function_declaration           shift and go to state 1
+
+state 1
+
+    (0) S' -> function_declaration .
+
+
+
+state 2
+
+    (1) function_declaration -> DEF . IDENTIFIER LPAREN parameter_list RPAREN COLON
+
+    IDENTIFIER      shift and go to state 3
+
+
+state 3
+
+    (1) function_declaration -> DEF IDENTIFIER . LPAREN parameter_list RPAREN COLON
+
+    LPAREN          shift and go to state 4
+
+
+state 4
+
+    (1) function_declaration -> DEF IDENTIFIER LPAREN . parameter_list RPAREN COLON
+    (2) parameter_list -> . parameters
+    (3) parameter_list -> . empty
+    (4) parameters -> . parameter
+    (5) parameters -> . parameter COMMA parameters_without_default
+    (6) parameters -> . parameter_with_default
+    (13) empty -> .
+    (9) parameter -> . IDENTIFIER
+    (10) parameter_with_default -> . parameter EQUAL IDENTIFIER
+    (11) parameter_with_default -> . parameter EQUAL NUMBER
+    (12) parameter_with_default -> . parameter EQUAL STRING
+
+    RPAREN          reduce using rule 13 (empty -> .)
+    IDENTIFIER      shift and go to state 5
+
+    parameter_list                 shift and go to state 6
+    parameters                     shift and go to state 7
+    empty                          shift and go to state 8
+    parameter                      shift and go to state 9
+    parameter_with_default         shift and go to state 10
+
+state 5
+
+    (9) parameter -> IDENTIFIER .
+
+    COMMA           reduce using rule 9 (parameter -> IDENTIFIER .)
+    EQUAL           reduce using rule 9 (parameter -> IDENTIFIER .)
+    RPAREN          reduce using rule 9 (parameter -> IDENTIFIER .)
+
+
+state 6
+
+    (1) function_declaration -> DEF IDENTIFIER LPAREN parameter_list . RPAREN COLON
+
+    RPAREN          shift and go to state 11
+
+
+state 7
+
+    (2) parameter_list -> parameters .
+
+    RPAREN          reduce using rule 2 (parameter_list -> parameters .)
+
+
+state 8
+
+    (3) parameter_list -> empty .
+
+    RPAREN          reduce using rule 3 (parameter_list -> empty .)
+
+
+state 9
+
+    (4) parameters -> parameter .
+    (5) parameters -> parameter . COMMA parameters_without_default
+    (10) parameter_with_default -> parameter . EQUAL IDENTIFIER
+    (11) parameter_with_default -> parameter . EQUAL NUMBER
+    (12) parameter_with_default -> parameter . EQUAL STRING
+
+    RPAREN          reduce using rule 4 (parameters -> parameter .)
+    COMMA           shift and go to state 12
+    EQUAL           shift and go to state 13
+
+
+state 10
+
+    (6) parameters -> parameter_with_default .
+
+    RPAREN          reduce using rule 6 (parameters -> parameter_with_default .)
+
+
+state 11
+
+    (1) function_declaration -> DEF IDENTIFIER LPAREN parameter_list RPAREN . COLON
+
+    COLON           shift and go to state 14
+
+
+state 12
+
+    (5) parameters -> parameter COMMA . parameters_without_default
+    (7) parameters_without_default -> . parameter
+    (8) parameters_without_default -> . parameter COMMA parameters_without_default
+    (9) parameter -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 5
+
+    parameter                      shift and go to state 15
+    parameters_without_default     shift and go to state 16
+
+state 13
+
+    (10) parameter_with_default -> parameter EQUAL . IDENTIFIER
+    (11) parameter_with_default -> parameter EQUAL . NUMBER
+    (12) parameter_with_default -> parameter EQUAL . STRING
+
+    IDENTIFIER      shift and go to state 17
+    NUMBER          shift and go to state 18
+    STRING          shift and go to state 19
+
+
+state 14
+
+    (1) function_declaration -> DEF IDENTIFIER LPAREN parameter_list RPAREN COLON .
+
+    $end            reduce using rule 1 (function_declaration -> DEF IDENTIFIER LPAREN parameter_list RPAREN COLON .)
+
+
+state 15
+
+    (7) parameters_without_default -> parameter .
+    (8) parameters_without_default -> parameter . COMMA parameters_without_default
+
+    RPAREN          reduce using rule 7 (parameters_without_default -> parameter .)
+    COMMA           shift and go to state 20
+
+
+state 16
+
+    (5) parameters -> parameter COMMA parameters_without_default .
+
+    RPAREN          reduce using rule 5 (parameters -> parameter COMMA parameters_without_default .)
+
+
+state 17
+
+    (10) parameter_with_default -> parameter EQUAL IDENTIFIER .
+
+    RPAREN          reduce using rule 10 (parameter_with_default -> parameter EQUAL IDENTIFIER .)
+
+
+state 18
+
+    (11) parameter_with_default -> parameter EQUAL NUMBER .
+
+    RPAREN          reduce using rule 11 (parameter_with_default -> parameter EQUAL NUMBER .)
+
+
+state 19
+
+    (12) parameter_with_default -> parameter EQUAL STRING .
+
+    RPAREN          reduce using rule 12 (parameter_with_default -> parameter EQUAL STRING .)
+
+
+state 20
+
+    (8) parameters_without_default -> parameter COMMA . parameters_without_default
+    (7) parameters_without_default -> . parameter
+    (8) parameters_without_default -> . parameter COMMA parameters_without_default
+    (9) parameter -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 5
+
+    parameter                      shift and go to state 15
+    parameters_without_default     shift and go to state 21
+
+state 21
+
+    (8) parameters_without_default -> parameter COMMA parameters_without_default .
+
+    RPAREN          reduce using rule 8 (parameters_without_default -> parameter COMMA parameters_without_default .)
+

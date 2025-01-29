@@ -1,0 +1,426 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statement
+Rule 1     statement -> declaration
+Rule 2     statement -> assignment
+Rule 3     statement -> type_declaration
+Rule 4     declaration -> type IDENTIFIER EQUAL expression
+Rule 5     declaration -> type IDENTIFIER COLON expression
+Rule 6     declaration -> IDENTIFIER COLON type
+Rule 7     declaration -> IDENTIFIER EQUAL type LPAREN expression RPAREN
+Rule 8     declaration -> IDENTIFIER
+Rule 9     type_declaration -> IDENTIFIER COLON type EQUAL expression
+Rule 10    assignment -> IDENTIFIER EQUAL expression
+Rule 11    type -> INT
+Rule 12    type -> FLOAT
+Rule 13    type -> STRING_TYPE
+Rule 14    type -> DOUBLE
+Rule 15    expression -> NUMBER
+Rule 16    expression -> STRING
+Rule 17    expression -> type LPAREN expression RPAREN
+
+Terminals, with rules where they appear
+
+COLON                : 5 6 9
+DOUBLE               : 14
+EQUAL                : 4 7 9 10
+FLOAT                : 12
+IDENTIFIER           : 4 5 6 7 8 9 10
+INT                  : 11
+LPAREN               : 7 17
+NUMBER               : 15
+RPAREN               : 7 17
+STRING               : 16
+STRING_TYPE          : 13
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 2
+declaration          : 1
+expression           : 4 5 7 9 10 17
+statement            : 0
+type                 : 4 5 6 7 9 17
+type_declaration     : 3
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statement
+    (1) statement -> . declaration
+    (2) statement -> . assignment
+    (3) statement -> . type_declaration
+    (4) declaration -> . type IDENTIFIER EQUAL expression
+    (5) declaration -> . type IDENTIFIER COLON expression
+    (6) declaration -> . IDENTIFIER COLON type
+    (7) declaration -> . IDENTIFIER EQUAL type LPAREN expression RPAREN
+    (8) declaration -> . IDENTIFIER
+    (10) assignment -> . IDENTIFIER EQUAL expression
+    (9) type_declaration -> . IDENTIFIER COLON type EQUAL expression
+    (11) type -> . INT
+    (12) type -> . FLOAT
+    (13) type -> . STRING_TYPE
+    (14) type -> . DOUBLE
+
+    IDENTIFIER      shift and go to state 6
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    STRING_TYPE     shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    statement                      shift and go to state 1
+    declaration                    shift and go to state 2
+    assignment                     shift and go to state 3
+    type_declaration               shift and go to state 4
+    type                           shift and go to state 5
+
+state 1
+
+    (0) S' -> statement .
+
+
+
+state 2
+
+    (1) statement -> declaration .
+
+    $end            reduce using rule 1 (statement -> declaration .)
+
+
+state 3
+
+    (2) statement -> assignment .
+
+    $end            reduce using rule 2 (statement -> assignment .)
+
+
+state 4
+
+    (3) statement -> type_declaration .
+
+    $end            reduce using rule 3 (statement -> type_declaration .)
+
+
+state 5
+
+    (4) declaration -> type . IDENTIFIER EQUAL expression
+    (5) declaration -> type . IDENTIFIER COLON expression
+
+    IDENTIFIER      shift and go to state 11
+
+
+state 6
+
+    (6) declaration -> IDENTIFIER . COLON type
+    (7) declaration -> IDENTIFIER . EQUAL type LPAREN expression RPAREN
+    (8) declaration -> IDENTIFIER .
+    (10) assignment -> IDENTIFIER . EQUAL expression
+    (9) type_declaration -> IDENTIFIER . COLON type EQUAL expression
+
+    COLON           shift and go to state 12
+    EQUAL           shift and go to state 13
+    $end            reduce using rule 8 (declaration -> IDENTIFIER .)
+
+
+state 7
+
+    (11) type -> INT .
+
+    IDENTIFIER      reduce using rule 11 (type -> INT .)
+    EQUAL           reduce using rule 11 (type -> INT .)
+    $end            reduce using rule 11 (type -> INT .)
+    LPAREN          reduce using rule 11 (type -> INT .)
+
+
+state 8
+
+    (12) type -> FLOAT .
+
+    IDENTIFIER      reduce using rule 12 (type -> FLOAT .)
+    EQUAL           reduce using rule 12 (type -> FLOAT .)
+    $end            reduce using rule 12 (type -> FLOAT .)
+    LPAREN          reduce using rule 12 (type -> FLOAT .)
+
+
+state 9
+
+    (13) type -> STRING_TYPE .
+
+    IDENTIFIER      reduce using rule 13 (type -> STRING_TYPE .)
+    EQUAL           reduce using rule 13 (type -> STRING_TYPE .)
+    $end            reduce using rule 13 (type -> STRING_TYPE .)
+    LPAREN          reduce using rule 13 (type -> STRING_TYPE .)
+
+
+state 10
+
+    (14) type -> DOUBLE .
+
+    IDENTIFIER      reduce using rule 14 (type -> DOUBLE .)
+    EQUAL           reduce using rule 14 (type -> DOUBLE .)
+    $end            reduce using rule 14 (type -> DOUBLE .)
+    LPAREN          reduce using rule 14 (type -> DOUBLE .)
+
+
+state 11
+
+    (4) declaration -> type IDENTIFIER . EQUAL expression
+    (5) declaration -> type IDENTIFIER . COLON expression
+
+    EQUAL           shift and go to state 14
+    COLON           shift and go to state 15
+
+
+state 12
+
+    (6) declaration -> IDENTIFIER COLON . type
+    (9) type_declaration -> IDENTIFIER COLON . type EQUAL expression
+    (11) type -> . INT
+    (12) type -> . FLOAT
+    (13) type -> . STRING_TYPE
+    (14) type -> . DOUBLE
+
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    STRING_TYPE     shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    type                           shift and go to state 16
+
+state 13
+
+    (7) declaration -> IDENTIFIER EQUAL . type LPAREN expression RPAREN
+    (10) assignment -> IDENTIFIER EQUAL . expression
+    (11) type -> . INT
+    (12) type -> . FLOAT
+    (13) type -> . STRING_TYPE
+    (14) type -> . DOUBLE
+    (15) expression -> . NUMBER
+    (16) expression -> . STRING
+    (17) expression -> . type LPAREN expression RPAREN
+
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    STRING_TYPE     shift and go to state 9
+    DOUBLE          shift and go to state 10
+    NUMBER          shift and go to state 19
+    STRING          shift and go to state 20
+
+    type                           shift and go to state 17
+    expression                     shift and go to state 18
+
+state 14
+
+    (4) declaration -> type IDENTIFIER EQUAL . expression
+    (15) expression -> . NUMBER
+    (16) expression -> . STRING
+    (17) expression -> . type LPAREN expression RPAREN
+    (11) type -> . INT
+    (12) type -> . FLOAT
+    (13) type -> . STRING_TYPE
+    (14) type -> . DOUBLE
+
+    NUMBER          shift and go to state 19
+    STRING          shift and go to state 20
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    STRING_TYPE     shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    type                           shift and go to state 21
+    expression                     shift and go to state 22
+
+state 15
+
+    (5) declaration -> type IDENTIFIER COLON . expression
+    (15) expression -> . NUMBER
+    (16) expression -> . STRING
+    (17) expression -> . type LPAREN expression RPAREN
+    (11) type -> . INT
+    (12) type -> . FLOAT
+    (13) type -> . STRING_TYPE
+    (14) type -> . DOUBLE
+
+    NUMBER          shift and go to state 19
+    STRING          shift and go to state 20
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    STRING_TYPE     shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    type                           shift and go to state 21
+    expression                     shift and go to state 23
+
+state 16
+
+    (6) declaration -> IDENTIFIER COLON type .
+    (9) type_declaration -> IDENTIFIER COLON type . EQUAL expression
+
+    $end            reduce using rule 6 (declaration -> IDENTIFIER COLON type .)
+    EQUAL           shift and go to state 24
+
+
+state 17
+
+    (7) declaration -> IDENTIFIER EQUAL type . LPAREN expression RPAREN
+    (17) expression -> type . LPAREN expression RPAREN
+
+    LPAREN          shift and go to state 25
+
+
+state 18
+
+    (10) assignment -> IDENTIFIER EQUAL expression .
+
+    $end            reduce using rule 10 (assignment -> IDENTIFIER EQUAL expression .)
+
+
+state 19
+
+    (15) expression -> NUMBER .
+
+    $end            reduce using rule 15 (expression -> NUMBER .)
+    RPAREN          reduce using rule 15 (expression -> NUMBER .)
+
+
+state 20
+
+    (16) expression -> STRING .
+
+    $end            reduce using rule 16 (expression -> STRING .)
+    RPAREN          reduce using rule 16 (expression -> STRING .)
+
+
+state 21
+
+    (17) expression -> type . LPAREN expression RPAREN
+
+    LPAREN          shift and go to state 26
+
+
+state 22
+
+    (4) declaration -> type IDENTIFIER EQUAL expression .
+
+    $end            reduce using rule 4 (declaration -> type IDENTIFIER EQUAL expression .)
+
+
+state 23
+
+    (5) declaration -> type IDENTIFIER COLON expression .
+
+    $end            reduce using rule 5 (declaration -> type IDENTIFIER COLON expression .)
+
+
+state 24
+
+    (9) type_declaration -> IDENTIFIER COLON type EQUAL . expression
+    (15) expression -> . NUMBER
+    (16) expression -> . STRING
+    (17) expression -> . type LPAREN expression RPAREN
+    (11) type -> . INT
+    (12) type -> . FLOAT
+    (13) type -> . STRING_TYPE
+    (14) type -> . DOUBLE
+
+    NUMBER          shift and go to state 19
+    STRING          shift and go to state 20
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    STRING_TYPE     shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    type                           shift and go to state 21
+    expression                     shift and go to state 27
+
+state 25
+
+    (7) declaration -> IDENTIFIER EQUAL type LPAREN . expression RPAREN
+    (17) expression -> type LPAREN . expression RPAREN
+    (15) expression -> . NUMBER
+    (16) expression -> . STRING
+    (17) expression -> . type LPAREN expression RPAREN
+    (11) type -> . INT
+    (12) type -> . FLOAT
+    (13) type -> . STRING_TYPE
+    (14) type -> . DOUBLE
+
+    NUMBER          shift and go to state 19
+    STRING          shift and go to state 20
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    STRING_TYPE     shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    type                           shift and go to state 21
+    expression                     shift and go to state 28
+
+state 26
+
+    (17) expression -> type LPAREN . expression RPAREN
+    (15) expression -> . NUMBER
+    (16) expression -> . STRING
+    (17) expression -> . type LPAREN expression RPAREN
+    (11) type -> . INT
+    (12) type -> . FLOAT
+    (13) type -> . STRING_TYPE
+    (14) type -> . DOUBLE
+
+    NUMBER          shift and go to state 19
+    STRING          shift and go to state 20
+    INT             shift and go to state 7
+    FLOAT           shift and go to state 8
+    STRING_TYPE     shift and go to state 9
+    DOUBLE          shift and go to state 10
+
+    type                           shift and go to state 21
+    expression                     shift and go to state 29
+
+state 27
+
+    (9) type_declaration -> IDENTIFIER COLON type EQUAL expression .
+
+    $end            reduce using rule 9 (type_declaration -> IDENTIFIER COLON type EQUAL expression .)
+
+
+state 28
+
+    (7) declaration -> IDENTIFIER EQUAL type LPAREN expression . RPAREN
+    (17) expression -> type LPAREN expression . RPAREN
+
+    RPAREN          shift and go to state 30
+
+
+state 29
+
+    (17) expression -> type LPAREN expression . RPAREN
+
+    RPAREN          shift and go to state 31
+
+
+state 30
+
+    (7) declaration -> IDENTIFIER EQUAL type LPAREN expression RPAREN .
+    (17) expression -> type LPAREN expression RPAREN .
+
+  ! reduce/reduce conflict for $end resolved using rule 7 (declaration -> IDENTIFIER EQUAL type LPAREN expression RPAREN .)
+    $end            reduce using rule 7 (declaration -> IDENTIFIER EQUAL type LPAREN expression RPAREN .)
+
+  ! $end            [ reduce using rule 17 (expression -> type LPAREN expression RPAREN .) ]
+
+
+state 31
+
+    (17) expression -> type LPAREN expression RPAREN .
+
+    $end            reduce using rule 17 (expression -> type LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 17 (expression -> type LPAREN expression RPAREN .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: reduce/reduce conflict in state 30 resolved using rule (declaration -> IDENTIFIER EQUAL type LPAREN expression RPAREN)
+WARNING: rejected rule (expression -> type LPAREN expression RPAREN) in state 30
